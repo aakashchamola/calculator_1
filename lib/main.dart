@@ -18,18 +18,131 @@ class _CalculatorState extends State<Calculator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.bgBlack,
+      backgroundColor: Colors.transparent,
       body: Column(
         children: [
-          //Responsive Result area
+          //input output area
           Expanded(
               child: Container(
-            color: Colors.red,
+            width: double.infinity,
+            color: AppColors.bgLightBlack,
+            padding: const EdgeInsets.all(12),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "Input",
+                  style: TextStyle(
+                    fontSize: 48,
+                    color: AppColors.buttonTextWhite1,
+                  ),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Output",
+                  style: TextStyle(
+                    fontSize: 28,
+                    color: AppColors.buttonTextWhite1,
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+              ],
+            ),
           )),
           //Buttons Area
           Row(
             children: [
-              button(text: "we'll make add all the buttons in the next commit"),
+              button(
+                text: 'AC',
+                textColor: AppColors.buttonTextOrange2,
+                buttonColor: AppColors.bgButtonBlack2,
+              ),
+              button(
+                text: '<',
+                textColor: AppColors.buttonTextOrange2,
+                buttonColor: AppColors.bgButtonBlack2,
+              ),
+              button(
+                text: '',
+                buttonColor: AppColors.bgBlack,
+              ),
+              button(
+                text: '/',
+                buttonColor: AppColors.bgButtonBlack2,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              button(
+                text: '7',
+              ),
+              button(
+                text: '8',
+              ),
+              button(
+                text: '9',
+              ),
+              button(
+                text: 'X',
+                buttonColor: AppColors.bgButtonBlack2,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              button(
+                text: '4',
+              ),
+              button(
+                text: '5',
+              ),
+              button(
+                text: '6',
+              ),
+              button(
+                text: '-',
+                buttonColor: AppColors.bgButtonBlack2,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              button(
+                text: '1',
+              ),
+              button(
+                text: '2',
+              ),
+              button(
+                text: '3',
+              ),
+              button(
+                text: '+',
+                buttonColor: AppColors.bgButtonBlack2,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              button(
+                text: '%',
+              ),
+              button(
+                text: '0',
+              ),
+              button(
+                text: '.',
+              ),
+              button(
+                text: '=',
+                buttonColor: AppColors.bgButtonOrange2,
+              ),
             ],
           ),
         ],
@@ -55,7 +168,7 @@ class _CalculatorState extends State<Calculator> {
               child: Text(
                 text,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: 22,
                   color: textColor,
                   fontWeight: FontWeight.bold,
                 ),
