@@ -17,26 +17,40 @@ class Calculator extends StatefulWidget {
 
 class _CalculatorState extends State<Calculator> {
   //variables
-  var input = "";
+  var input = "0";
   var output = "";
   var operation = "";
+  var hideInput = false;
+  var outputSize = 34.0;
 
   onButtonClick(value) {
     if (value == "AC") {
       input = '';
       output = '';
     } else if (value == "<") {
-      input = input.substring(0, input.length - 1);
+      if (input.isNotEmpty) {
+        input = input.substring(0, input.length - 1);
+      }
     } else if (value == "=") {
-      var userInput = input;
-      userInput = userInput.replaceAll("X", "*");
-      Parser p = Parser();
-      Expression expression = p.parse(userInput);
-      ContextModel cm = ContextModel();
-      var finalValue = expression.evaluate(EvaluationType.REAL, cm);
-      output = finalValue.toString();
+      if (input.isNotEmpty) {
+        var userInput = input;
+        userInput = userInput.replaceAll("X", "*");
+        Parser p = Parser();
+        Expression expression = p.parse(userInput);
+        ContextModel cm = ContextModel();
+        var finalValue = expression.evaluate(EvaluationType.REAL, cm);
+        output = finalValue.toString();
+        if (output.endsWith(".0")) {
+          output = output.substring(0, output.length - 2);
+        }
+        input = output;
+        hideInput = true;
+        outputSize = 50;
+      }
     } else {
       input = input + value;
+      hideInput = false;
+      outputSize = 34;
     }
     setState(() {});
   }
@@ -58,7 +72,7 @@ class _CalculatorState extends State<Calculator> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  input,
+                  hideInput ? "" : input,
                   style: const TextStyle(
                     fontSize: 48,
                     color: AppColors.buttonTextWhite1,
@@ -69,8 +83,8 @@ class _CalculatorState extends State<Calculator> {
                 ),
                 Text(
                   output,
-                  style: const TextStyle(
-                    fontSize: 28,
+                  style: TextStyle(
+                    fontSize: outputSize,
                     color: AppColors.buttonTextWhite1,
                   ),
                 ),
