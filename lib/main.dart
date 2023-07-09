@@ -206,8 +206,8 @@ class _CalculatorState extends State<Calculator> {
                 // you can comment out the part above, from Expanded, as it is not part of calculator
                 // and just add the following code in place of Expanded :
                 button(
-                  text: '/',
-                  buttonColor: AppColors.bgButtonBlack2,
+                  text: '',
+                  buttonColor: AppColors.bgBlack,
                 ),
                 button(
                   text: '/',
