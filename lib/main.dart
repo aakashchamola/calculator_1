@@ -176,9 +176,38 @@ class _CalculatorState extends State<Calculator> {
                   textColor: AppColors.buttonTextOrange2,
                   buttonColor: AppColors.bgButtonBlack2,
                 ),
+                // this expanded widget is not related to code, i just added it here for fun
+                // Expanded(
+                //     child: Container(
+                //         margin: const EdgeInsets.all(8),
+                //         child: ElevatedButton(
+                //           onPressed: () async {
+                //             await showDialog(
+                //               context: context,
+                //               builder: (_) => Dialog(
+                //                 child: Container(
+                //                   width: 300,
+                //                   height: 300,
+                //                   decoration: const BoxDecoration(
+                //                       image: DecorationImage(
+                //                           image: ExactAssetImage(madao),
+                //                           fit: BoxFit.cover)),
+                //                 ),
+                //               ),
+                //             );
+                //           },
+                //           style: ElevatedButton.styleFrom(
+                //               shape: RoundedRectangleBorder(
+                //                   borderRadius: BorderRadius.circular(12)),
+                //               padding: const EdgeInsets.all(22),
+                //               backgroundColor: Colors.black),
+                //           child: const Text(''),
+                //         ))),
+                // you can comment out the part above, from Expanded, as it is not part of calculator
+                // and just add the following code in place of Expanded :
                 button(
-                  text: '',
-                  buttonColor: AppColors.bgBlack,
+                  text: '/',
+                  buttonColor: AppColors.bgButtonBlack2,
                 ),
                 button(
                   text: '/',

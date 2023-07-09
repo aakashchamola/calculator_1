@@ -10,3 +10,5 @@ class AppColors {
   static const Color buttonTextWhite1 = Color.fromARGB(255, 214, 214, 214);
   static const Color buttonTextOrange2 = Color.fromARGB(255, 251, 122, 41);
 }
+
+const String madao = 'lib/madao.png';
