@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:calculator_1/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:math_expressions/math_expressions.dart';
 
 void main() {
@@ -22,13 +25,27 @@ class _CalculatorState extends State<Calculator> {
   var operation = "";
   var hideInput = false;
   var outputSize = 34.0;
-
   onButtonClick(value) {
+    // if (input.length > 12) {
+    //   if (input.contains('-') ||
+    //       input.contains('X') ||
+    //       input.contains('/') ||
+    //       input.contains('+')) {
+    //   } else {
+    //     var b = input.substring(0, 12);
+    //     input = b;
+    //   }
+    // }
     if (value == "AC") {
       input = '';
       output = '';
     } else if (value == "<") {
       if (input.isNotEmpty) {
+        //   if (input.length == 13) {
+        //     input = input.substring(0, input.length);
+        //   } else {
+        //     input = input.substring(0, input.length - 1);
+        //   }
         input = input.substring(0, input.length - 1);
       }
     } else if (value == "=") {
@@ -49,6 +66,25 @@ class _CalculatorState extends State<Calculator> {
         if (output.endsWith(".0")) {
           output = output.substring(0, output.length - 2);
         }
+        // if (output.contains(".")) {
+        //   // var b;
+        //   // var a = b.length(output.substring(-1, output.indexOf('.')));
+        //   // if (a > 5) {
+        //   //   output = output.substring(0, output.indexOf('.') + 5);
+        //   //   final snackBar = SnackBar(
+        //   //     content: const Text('Answer is Only Upto 5 Decimal Places'),
+        //   //     action: SnackBarAction(
+        //   //       label: 'Ok',
+        //   //       onPressed: () {
+        //   //         // Some code to undo the change.
+        //   //       },
+        //   //     ),
+        //   //   );
+        //   //   ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        //   // } else {
+        //   //   output = finalValue.toString();
+        //   // }
+        // }
         hideInput = true;
         outputSize = 50;
         if (output.isNotEmpty) {
@@ -75,6 +111,8 @@ class _CalculatorState extends State<Calculator> {
           input = output;
           output = '';
           hideInput = false;
+        } else {
+          output = '';
         }
       }
       input = input + value;
