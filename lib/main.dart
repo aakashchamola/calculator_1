@@ -17,7 +17,7 @@ class Calculator extends StatefulWidget {
 
 class _CalculatorState extends State<Calculator> {
   //variables
-  var input = "0";
+  var input = "";
   var output = "";
   var operation = "";
   var hideInput = false;
@@ -32,6 +32,12 @@ class _CalculatorState extends State<Calculator> {
         input = input.substring(0, input.length - 1);
       }
     } else if (value == "=") {
+      if ((input.endsWith("+") ||
+          input.endsWith("-") ||
+          input.endsWith("/") ||
+          input.endsWith("*"))) {
+        input = input.substring(0, input.length - 1);
+      }
       if (input.isNotEmpty) {
         var userInput = input;
         userInput = userInput.replaceAll("X", "*");
@@ -43,11 +49,34 @@ class _CalculatorState extends State<Calculator> {
         if (output.endsWith(".0")) {
           output = output.substring(0, output.length - 2);
         }
-        input = output;
         hideInput = true;
         outputSize = 50;
+        if (output.isNotEmpty) {
+          input = output;
+          if (value == "+" || value == "-" || value == "/" || value == "*") {
+            hideInput = false;
+            input = output + value;
+          } else {
+            input = '';
+          }
+        }
       }
     } else {
+      if (input.endsWith("+") ||
+          input.endsWith("-") ||
+          input.endsWith("/") ||
+          input.endsWith("*")) {
+        if ((value == "+" || value == "-" || value == "/" || value == "*")) {
+          input = input.substring(0, input.length - 1);
+        }
+      }
+      if (output.isNotEmpty) {
+        if (value == "+" || value == "-" || value == "/" || value == "*") {
+          input = output;
+          output = '';
+          hideInput = false;
+        }
+      }
       input = input + value;
       hideInput = false;
       outputSize = 34;
@@ -95,27 +124,30 @@ class _CalculatorState extends State<Calculator> {
             ),
           )),
           //Buttons Area
-          Row(
-            children: [
-              button(
-                text: 'AC',
-                textColor: AppColors.buttonTextOrange2,
-                buttonColor: AppColors.bgButtonBlack2,
-              ),
-              button(
-                text: '<',
-                textColor: AppColors.buttonTextOrange2,
-                buttonColor: AppColors.bgButtonBlack2,
-              ),
-              button(
-                text: '',
-                buttonColor: AppColors.bgBlack,
-              ),
-              button(
-                text: '/',
-                buttonColor: AppColors.bgButtonBlack2,
-              ),
-            ],
+          Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(5)),
+            child: Row(
+              children: [
+                button(
+                  text: 'AC',
+                  textColor: AppColors.buttonTextOrange2,
+                  buttonColor: AppColors.bgButtonBlack2,
+                ),
+                button(
+                  text: '<',
+                  textColor: AppColors.buttonTextOrange2,
+                  buttonColor: AppColors.bgButtonBlack2,
+                ),
+                button(
+                  text: '',
+                  buttonColor: AppColors.bgBlack,
+                ),
+                button(
+                  text: '/',
+                  buttonColor: AppColors.bgButtonBlack2,
+                ),
+              ],
+            ),
           ),
           Row(
             children: [
@@ -129,7 +161,7 @@ class _CalculatorState extends State<Calculator> {
                 text: '9',
               ),
               button(
-                text: 'X',
+                text: '*',
                 buttonColor: AppColors.bgButtonBlack2,
               ),
             ],
@@ -208,7 +240,7 @@ class _CalculatorState extends State<Calculator> {
               child: Text(
                 text,
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 25,
                   color: textColor,
                   fontWeight: FontWeight.bold,
                 ),
